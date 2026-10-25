@@ -22,6 +22,11 @@ data "utils_deep_merge_yaml" "tags" {
   ]
 }
 
+resource "aws_kms_key" "logs" {
+  description             = "Encryption key for application logs"
+  deletion_window_in_days = 7
+}
+
 resource "aws_s3_bucket" "app_logs" {
   bucket = "cab-demo-app-logs"
   tags   = yamldecode(data.utils_deep_merge_yaml.tags.output)
