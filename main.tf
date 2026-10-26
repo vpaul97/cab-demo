@@ -21,6 +21,7 @@ locals {
 resource "aws_kms_key" "logs" {
   description             = "Encryption key for application logs"
   deletion_window_in_days = 7
+  enable_key_rotation     = true
 }
 
 resource "aws_s3_bucket" "app_logs" {
